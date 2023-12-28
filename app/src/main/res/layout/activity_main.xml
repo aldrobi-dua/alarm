@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
     <View
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:background="#9C27B0"
-
+        android:background="#F5A715"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -42,6 +42,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:text="@string/g_rev_ekle"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
