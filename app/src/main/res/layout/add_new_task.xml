@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <View
         android:id="@+id/view"
         android:layout_width="wrap_content"
@@ -25,18 +24,55 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:id="@+id/date_button"
+        android:layout_width="408dp"
+        android:layout_height="46dp"
+        android:text="Tarih Seçiniz"
         app:cornerRadius="0dp"
-        app:layout_constraintCircleRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <Button
+        android:id="@+id/time_button"
+        android:layout_width="413dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:text="Saat Seçiniz"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_button" />
+
+    <Button
+        android:id="@+id/audio_button"
+        android:layout_width="410dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:text="Zil Sesi Seçiniz"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_button" />
+
+    <Button
+        android:id="@+id/duration_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
+        android:text="Haturlatma Zamanı Seçiniz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
+        app:layout_constraintTop_toBottomOf="@id/audio_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

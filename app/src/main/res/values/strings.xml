@@ -1,5 +1,8 @@
+<!-- res/values/strings.xml -->
 <resources>
     <string name="app_name">alarm</string>
     <string name="g_rev_listesi">Görev Listesi</string>
-    <string name="g_rev_ekle">+ Görev Ekle</string>
+    <string name="g_rev_ekle">+ Görev Ekle</string>
+
 </resources>
+
