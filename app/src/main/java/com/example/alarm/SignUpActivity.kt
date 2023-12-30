@@ -2,36 +2,52 @@ package com.example.alarm
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.alarm.databinding.ActivitySignUpBinding
+import com.google.firebase.auth.FirebaseAuth
 
-class RegisterActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
-        val buttonRegister: Button = findViewById(R.id.buttonRegister)
-        val textViewLogin: TextView = findViewById(R.id.textViewLogin)
-        val editTextFullName: EditText = findViewById(R.id.editTextFullName)
-        val editTextEmail: EditText = findViewById(R.id.editTextEmail)
-        val editTextNewPassword: EditText = findViewById(R.id.editTextNewPassword)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        buttonRegister.setOnClickListener {
-            // Kaydol butonuna tıklanınca yapılacak işlemler
-            val adinizSoyadiniz = editTextFullName.text.toString()
-            val epostaAdresi = editTextEmail.text.toString()
-            val yeniSifre = editTextNewPassword.text.toString()
-            val intent = Intent(this, MainActivity::class.java)
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        binding.textView.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
+        binding.button.setOnClickListener {
+            val email = binding.emailEt.text.toString()
+            val pass = binding.passET.text.toString()
+            val confirmPass = binding.PassEt.text.toString()
 
-        textViewLogin.setOnClickListener {
-            // "Giriş yapın" metnine tıklanınca yapılacak işlemler
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
+                if (pass == confirmPass) {
+
+                    firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val intent = Intent(this, SignInActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+
+            }
         }
     }
 }
