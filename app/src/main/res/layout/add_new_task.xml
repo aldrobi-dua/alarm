@@ -10,7 +10,8 @@
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:background="#F5A715" />
+        android:background="#F5A715"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/addNewTaskTitleTextView"
@@ -21,7 +22,8 @@
         android:textSize="26sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:layout_editor_absoluteY="10dp"
+        tools:ignore="MissingConstraints" />
 
 
     <Button
