@@ -24,5 +24,9 @@
             android:name=".AddNewTaskActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".Favorite"
+            android:exported="true">
+        </activity>
     </application>
 </manifest>

@@ -42,7 +42,7 @@ class AddNewTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_new_task)
 
-        tamam = findViewById(R.id.button3)
+        tamam = findViewById(R.id.kaydet)
         tamam.setOnClickListener {
             val etDescription = findViewById<EditText>(R.id.etDescription)
 
@@ -59,8 +59,13 @@ class AddNewTaskActivity : AppCompatActivity() {
             taskMap[reminderId] = newTaskData
 
             Log.d("TaskMap", "TaskMap: $taskMap")
-        }
 
+            // Set the result and finish the activity
+            val resultIntent = Intent()
+            resultIntent.putExtra("resultKey", "Data to pass back")
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
 
         // tone button
         audioButton = findViewById(R.id.audio_button)
@@ -81,7 +86,6 @@ class AddNewTaskActivity : AppCompatActivity() {
 
         val spinner = findViewById<Spinner>(R.id.spinner)
 
-        // Adapter'ı dizi kaynağı ile oluşturun
         val adapter = ArrayAdapter.createFromResource(this, R.array.reminder_times, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
