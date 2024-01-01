@@ -22,23 +22,21 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.UUID
 
-
-class AddNewTaskActivity: AppCompatActivity() {
+class AddNewTaskActivity : AppCompatActivity() {
 
     private val PICK_RINGTONE_REQUEST_CODE = 1
     private var selectedDate: Calendar = Calendar.getInstance()
     private var selectedTime: Calendar = Calendar.getInstance()
     private var ringtonePath: String? = null
-    private lateinit var selectedreminder: String
+    private lateinit var selectedReminder: String
     private lateinit var audioButton: Button
     private lateinit var tamam: Button
     private var timePickerDialog: TimePickerDialog? = null
     private var datePickerDialog: DatePickerDialog? = null
     private var selectedRingtoneUri: Uri? = null
 
-
-    // the Values is saved in this map
-    val TaskMap: MutableMap<String, NewTaskData> = mutableMapOf()
+    // Values are saved in this map
+    val taskMap: MutableMap<String, NewTaskData> = mutableMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,19 +47,20 @@ class AddNewTaskActivity: AppCompatActivity() {
             val etDescription = findViewById<EditText>(R.id.etDescription)
 
             val descriptionText = etDescription.text.toString()
-            val reminderId =  UUID.randomUUID().toString()
+            val reminderId = UUID.randomUUID().toString()
             val newTaskData = NewTaskData()
             val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate.time)
 
             newTaskData.selectedDate = formattedDate
             newTaskData.selectedTime = selectedTime.time
             newTaskData.ringtonePath = ringtonePath
-            newTaskData.selectedReminder = selectedreminder
+            newTaskData.selectedReminder = selectedReminder
             newTaskData.description = descriptionText
-            TaskMap[reminderId] = newTaskData
+            taskMap[reminderId] = newTaskData
 
-            Log.d("TaskMap", "TaskMap: $TaskMap")
+            Log.d("TaskMap", "TaskMap: $taskMap")
         }
+
 
         // tone button
         audioButton = findViewById(R.id.audio_button)
@@ -74,7 +73,6 @@ class AddNewTaskActivity: AppCompatActivity() {
         val date: Button = findViewById(R.id.date_button)
         date.setOnClickListener {
             showDatePicker()
-
         }
         val time: Button = findViewById(R.id.time_button)
         time.setOnClickListener {
@@ -83,10 +81,8 @@ class AddNewTaskActivity: AppCompatActivity() {
 
         val spinner = findViewById<Spinner>(R.id.spinner)
 
-        val values = arrayOf("5", "10", "15")
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, values)
-
+        // Adapter'ı dizi kaynağı ile oluşturun
+        val adapter = ArrayAdapter.createFromResource(this, R.array.reminder_times, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinner.adapter = adapter
@@ -96,11 +92,12 @@ class AddNewTaskActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View?,
                 position: Int,
-                id: Long) {
-                selectedreminder = parent.getItemAtPosition(position).toString()
-
+                id: Long
+            ) {
+                selectedReminder = parent.getItemAtPosition(position).toString()
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
     }
@@ -129,7 +126,6 @@ class AddNewTaskActivity: AppCompatActivity() {
             { _, hourOfDay, minute ->
                 selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 selectedTime.set(Calendar.MINUTE, minute)
-
             },
             selectedTime.get(Calendar.HOUR_OF_DAY),
             selectedTime.get(Calendar.MINUTE),
@@ -148,7 +144,6 @@ class AddNewTaskActivity: AppCompatActivity() {
             val uri = data?.getParcelableExtra<Uri>(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
 
             selectedRingtoneUri = uri
-
             ringtonePath = uri?.toString()
         }
     }

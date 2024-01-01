@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = GorevekleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val addTaskButton = binding.addTaskButton
         addTaskButton.setOnClickListener {
             val intent = Intent(this, AddNewTaskActivity::class.java)

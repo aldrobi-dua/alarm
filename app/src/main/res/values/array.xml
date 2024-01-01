@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="reminder_times">
-        <item>10 dakika</item>
-        <item>20 dakika</item>
-        <item>30 dakika</item>
-        <item>40 dakika</item>
-        <item>50 dakika</item>
+        <item>10 dakika Önce</item>
+        <item>20 dakika Önce</item>
+        <item>30 dakika Önce</item>
+        <item>40 dakika Önce</item>
+        <item>50 dakika Önce</item>
     </string-array>
 </resources>
 
