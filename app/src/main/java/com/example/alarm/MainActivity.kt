@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.alarm.databinding.GorevekleBinding
+import com.google.firebase.FirebaseApp
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,5 +21,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddNewTaskActivity::class.java)
             startActivity(intent)
         }
+        FirebaseApp.initializeApp(this)
+
     }
 }
+

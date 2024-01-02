@@ -1,18 +1,21 @@
 package com.example.alarm
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
+@Suppress("DEPRECATION")
 class Favorite : AppCompatActivity() {
 
     private lateinit var favoriteButton: ImageButton
     private lateinit var deleteButton: Button
     private lateinit var editButton: Button
-    private lateinit var kaydetButton: Button // Add this line
+    private lateinit var kaydetButton: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +25,7 @@ class Favorite : AppCompatActivity() {
         favoriteButton = findViewById(R.id.favoriteButton)
         deleteButton = findViewById(R.id.deleteTask)
         editButton = findViewById(R.id.editTask)
-        kaydetButton = findViewById(R.id.kaydet) // Replace with the actual ID
+        kaydetButton = findViewById(R.id.kaydet)
 
         favoriteButton.setOnClickListener {
             // Your code to favorite the activity
@@ -37,20 +40,29 @@ class Favorite : AppCompatActivity() {
         }
 
         kaydetButton.setOnClickListener {
-            // Your code to handle the Kaydet button click
-            val intent = Intent(this@Favorite, AddNewTaskActivity::class.java) // Replace with the target activity
-            startActivityForResult(intent, 123) // Use startActivityForResult to get results
+            val intent = Intent(this@Favorite, AddNewTaskActivity::class.java)
+            startActivityForResult(intent, 123)
         }
+
     }
 
     // Override this method to handle the result from AddNewTaskActivity
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 123 && resultCode == RESULT_OK) {
+        if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
             // Handle the result here, for example:
             val resultData = data?.getStringExtra("resultKey")
-            // Do something with the resultData, like displaying it in a TextView
+            val selectedDate = data?.getStringExtra("selectedDate")
+            val selectedTime = data?.getLongExtra("selectedTime", 0)
+
+            // Do something with the resultData, like displaying it in a Toast
+            Toast.makeText(
+                this,
+                "Result: $resultData, Date: $selectedDate, Time: $selectedTime",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

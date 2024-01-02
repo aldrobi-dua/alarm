@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.alarm
 
 import android.app.Activity
@@ -8,6 +10,8 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -17,12 +21,13 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.alarm.data.NewTaskData
+import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.UUID
 
-class AddNewTaskActivity : AppCompatActivity() {
+class AddNewTaskActivity() : AppCompatActivity(), Parcelable {
 
     private val PICK_RINGTONE_REQUEST_CODE = 1
     private var selectedDate: Calendar = Calendar.getInstance()
@@ -38,34 +43,49 @@ class AddNewTaskActivity : AppCompatActivity() {
     // Values are saved in this map
     val taskMap: MutableMap<String, NewTaskData> = mutableMapOf()
 
+    constructor(parcel: Parcel) : this() {
+        ringtonePath = parcel.readString()
+        selectedReminder = parcel.readString().toString()
+        selectedRingtoneUri = parcel.readParcelable(Uri::class.java.classLoader)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_new_task)
 
         tamam = findViewById(R.id.kaydet)
         tamam.setOnClickListener {
+            val database = FirebaseDatabase.getInstance().reference
+            val tasksRef = database.child("tasks") // Create a "tasks" node in your database
             val etDescription = findViewById<EditText>(R.id.etDescription)
+
 
             val descriptionText = etDescription.text.toString()
             val reminderId = UUID.randomUUID().toString()
-            val newTaskData = NewTaskData()
             val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate.time)
 
+            val newTaskData = NewTaskData()
             newTaskData.selectedDate = formattedDate
-            newTaskData.selectedTime = selectedTime.time
+            newTaskData.selectedTime = this.selectedTime.time
             newTaskData.ringtonePath = ringtonePath
             newTaskData.selectedReminder = selectedReminder
             newTaskData.description = descriptionText
-            taskMap[reminderId] = newTaskData
+
+            val taskRef = tasksRef.child(reminderId)
+            taskRef.setValue(newTaskData)
 
             Log.d("TaskMap", "TaskMap: $taskMap")
 
             // Set the result and finish the activity
             val resultIntent = Intent()
             resultIntent.putExtra("resultKey", "Data to pass back")
+            resultIntent.putExtra("selectedDate", formattedDate)
+            resultIntent.putExtra("selectedTime", selectedTime.timeInMillis)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
+
         }
+
 
         // tone button
         audioButton = findViewById(R.id.audio_button)
@@ -86,7 +106,11 @@ class AddNewTaskActivity : AppCompatActivity() {
 
         val spinner = findViewById<Spinner>(R.id.spinner)
 
-        val adapter = ArrayAdapter.createFromResource(this, R.array.reminder_times, android.R.layout.simple_spinner_item)
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.reminder_times,
+            android.R.layout.simple_spinner_item
+        )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinner.adapter = adapter
@@ -141,6 +165,27 @@ class AddNewTaskActivity : AppCompatActivity() {
         }
     }
 
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(ringtonePath)
+        parcel.writeString(selectedReminder)
+        parcel.writeParcelable(selectedRingtoneUri, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<AddNewTaskActivity> {
+        override fun createFromParcel(parcel: Parcel): AddNewTaskActivity {
+            return AddNewTaskActivity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<AddNewTaskActivity?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
