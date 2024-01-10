@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.alarm.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
+
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
@@ -20,7 +21,7 @@ class SignInActivity : AppCompatActivity() {
 
 
         firebaseAuth = FirebaseAuth.getInstance()
-        binding.textView.setOnClickListener {
+        binding.registerTextView.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }

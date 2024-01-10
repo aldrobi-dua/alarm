@@ -72,11 +72,11 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/registerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Henüz Kayıtlı Değilseniz, Kaydolun!"
+        android:text="@string/hen_z_kay_tl_de_ilseniz_kaydolun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

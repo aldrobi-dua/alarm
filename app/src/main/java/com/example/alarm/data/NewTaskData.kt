@@ -5,6 +5,7 @@ import android.os.Parcelable
 import java.util.*
 
 data class NewTaskData(
+    var id: String? = null,
     var selectedDate: String? = null,
     var selectedTime: Date = Calendar.getInstance().time,
     var ringtonePath: String? = null,
@@ -13,6 +14,7 @@ data class NewTaskData(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
+        parcel.readString(),
         Date(parcel.readLong()), // Convert Long to Date when reading from Parcel
         parcel.readString(),
         parcel.readString(),
@@ -20,6 +22,7 @@ data class NewTaskData(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(selectedDate)
         parcel.writeLong(selectedTime.time) // Convert Date to Long when writing to Parcel
         parcel.writeString(ringtonePath)

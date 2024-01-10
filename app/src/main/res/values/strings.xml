@@ -3,11 +3,22 @@
     <string name="app_name">alarm</string>
     <string name="g_rev_listesi">Yeni Görev Ekle</string>
     <string name="g_rev_ekle">+ Görev Ekle</string>
-    <string name="Alarm">Alarm</string>
-    <string name="alarm_al_yor">Alarm Zamanı!</string>
-    <string name="saat_ve_tarih">Saat ve tarih</string>
+    <string name="alarm_al_yor">Alarm Ayarla</string>
+    <string name="saat_ve_tarih">Saat ve Tarih</string>
     <string name="g_rev_ba_l">Görev Başlığı</string>
-    <string name="todo" />
+    <string name="todo">Yapılacaklar</string>
+    <string name="tarih_se_iniz">Tarih Seçiniz</string>
+    <string name="tarih_se_imi">Tarih Seçimi Description</string>
+    <string name="saat_se_iniz">Saat Seçiniz</string>
+    <string name="saat_se_imi">Saat Seçimi</string>
+    <string name="zil_sesi_se_iniz">Zil Sesi Seçiniz</string>
+    <string name="a_klama_yaz_n_z">Açıklama Yazınız</string>
+    <string name="kaydet">Kaydet</string>
+    <string name="hen_z_kay_tl_de_ilseniz_kaydolun">Henüz Kayıtlı Değilseniz, Kaydolun!</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
+    <string name="reminder_title">Hatırlatıcı</string>
+
 
 </resources>
 

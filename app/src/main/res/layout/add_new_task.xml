@@ -11,43 +11,46 @@
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:background="#F5A715"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/addNewTaskTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/g_rev_listesi"
         android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="10dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
 
     <Button
         android:id="@+id/date_button"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="59dp"
         android:layout_marginTop="20dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
         android:gravity="left"
-        android:text="Tarih Seçiniz"
+        android:text="@string/tarih_se_iniz"
         android:textColor="@color/black"
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,RtlHardcoded" />
 
     <ImageButton
         android:id="@+id/btnPickDate"
         android:layout_width="61dp"
         android:layout_height="58dp"
         android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="Tarih Seçimi"
+        android:contentDescription="@string/tarih_se_imi"
         android:src="@drawable/calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/date_button"
@@ -55,18 +58,18 @@
 
     <Button
         android:id="@+id/time_button"
-        android:layout_width="411dp"
-        android:layout_height="59dp"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="4dp"
         android:gravity="left"
-        android:text="Saat Seçiniz"
+        android:text="@string/saat_se_iniz"
         android:textColor="@color/black"
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_button" />
+        app:layout_constraintTop_toBottomOf="@+id/date_button"
+        tools:ignore="RtlHardcoded" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -74,7 +77,7 @@
         android:layout_height="58dp"
         android:layout_marginTop="4dp"
         android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="Tarih Seçimi"
+        android:contentDescription="@string/saat_se_imi"
         android:src="@drawable/clock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/time_button"
@@ -82,17 +85,18 @@
 
     <Button
         android:id="@+id/audio_button"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="59dp"
         android:layout_marginTop="12dp"
         android:background="@color/white"
         android:gravity="left"
-        android:text="Zil Sesi Seçiniz"
+        android:text="@string/zil_sesi_se_iniz"
         android:textColor="@color/black"
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_button" />
+        app:layout_constraintTop_toBottomOf="@+id/time_button"
+        tools:ignore="RtlHardcoded" />
 
     <ImageButton
         android:layout_width="61dp"
@@ -109,36 +113,36 @@
         android:layout_width="409dp"
         android:layout_height="109dp"
         android:layout_marginTop="60dp"
-        android:hint="Açıklama Yazınız"
+        android:hint="@string/a_klama_yaz_n_z"
         android:inputType="text"
         android:textColor="#F5A715"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/audio_button"
         tools:ignore="MissingConstraints,UnknownId" />
 
-
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="410dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="264dp"
-        android:entries="@array/reminder_times"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_button" />
+        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
     <Button
-        android:id="@+id/kaydet"
-        android:layout_width="125dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginBottom="50dp"
-        android:text="Kaydet"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/saveButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/kaydet"
+        android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
